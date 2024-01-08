@@ -27,7 +27,30 @@ public class ArticleService {
         return saved.getId();
     }
 
-    public void deleteArticle(Long id) {
-        articleRepository.deleteById(id);
+    public boolean deleteArticle(Long id, String password) {
+        Article article = readArticle(id);
+        if (password.equals(article.getPassword())) {
+            articleRepository.deleteById(id);
+            return true;
+        }
+        return false;
+    }
+
+    public boolean updateArticle(
+            Long id,
+            String password,
+            String writer,
+            String title,
+            String content
+    ) {
+        Article article = readArticle(id);
+        if (article.getPassword().equals(password)) {
+            article.setWriter(writer);
+            article.setTitle(title);
+            article.setContent(content);
+            articleRepository.save(article);
+            return true;
+        }
+        return false;
     }
 }

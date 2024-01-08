@@ -9,6 +9,7 @@
     <h2 th:text="${article.title}"></h2>
     <p>작성자: [[${article.writer}]]</p>
     <p>내용: [[${article.content}]]</p>
+    <a th:href="@{/article/{id}/update(id=${article.id})}">수정</a>
     <a th:href="@{/article/{id}/delete(id=${article.id})}">삭제</a>
     <a th:href="@{/boards/{id}(id=${article.getBoard().id})}">게시판으로 돌아가기...</a>
 </div>
@@ -17,7 +18,5 @@
     <p>잘못된 게시글 번호입니다.</p>
     <a href="/boards/">메인으로 돌아가기...</a>
 </div>
-
-
 </body>
 </html>

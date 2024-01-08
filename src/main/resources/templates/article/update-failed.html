@@ -1,0 +1,12 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>게시글 수정 실패</title>
+</head>
+<body>
+<h2>수정 실패!</h2>
+<p>게시글 번호 또는 비밀번호를 확인하세요.</p>
+<a th:href="@{/article/{id}(id=${articleId})}">게시글로</a>
+</body>
+</html>

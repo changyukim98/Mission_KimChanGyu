@@ -64,9 +64,43 @@ public class ArticleController {
 
     @PostMapping("/{articleId}/delete")
     public String deleteArticle(
-            @PathVariable("articleId") Long articleId
+            @PathVariable("articleId") Long articleId,
+            @RequestParam("password") String password,
+            Model model
     ) {
-        articleService.deleteArticle(articleId);
-        return "redirect:/boards/";
+        if (articleService.deleteArticle(articleId, password)) {
+            return "redirect:/boards/";
+        } else {
+            model.addAttribute("articleId", articleId);
+            return "article/delete-failed";
+        }
+    }
+
+    @GetMapping("/{articleId}/update")
+    public String updateArticleForm(
+            @PathVariable("articleId") Long articleId,
+            Model model
+    ) {
+        Article article = articleService.readArticle(articleId);
+        model.addAttribute("article", article);
+        return "article/article-update";
+    }
+
+    @PostMapping("/{articleId}/update")
+    public String updateArticle(
+            @PathVariable("articleId") Long articleId,
+            @RequestParam("password") String password,
+            @RequestParam("writer") String writer,
+            @RequestParam("title") String title,
+            @RequestParam("content") String content,
+            Model model
+    ) {
+        // 성공시
+        if (articleService.updateArticle(articleId, password, writer, title, content)) {
+            return String.format("redirect:/article/%d", articleId);
+        } else {
+            model.addAttribute("articleId", articleId);
+            return "article/update-failed";
+        }
     }
 }
