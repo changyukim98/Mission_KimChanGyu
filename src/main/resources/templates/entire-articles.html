@@ -6,8 +6,8 @@
 </head>
 <body>
 <h1>전체 게시글</h1>
-<ul th:each="post: ${posts}">
-   <li>[[${post.title}]]</li>
+<ul th:each="article: ${articles}">
+   <li>[[${article.title}]]</li>
 </ul>
 <a href="/boards/">게시판 목록으로...</a>
 </body>

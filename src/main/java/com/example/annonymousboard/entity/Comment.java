@@ -10,7 +10,7 @@ public class Comment {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private String id;
     @ManyToOne
-    private Post post;
+    private Article article;
     private String content;
     private String writer;
     private String password;

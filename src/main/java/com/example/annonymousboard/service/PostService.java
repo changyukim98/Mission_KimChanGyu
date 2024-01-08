@@ -1,6 +1,6 @@
 package com.example.annonymousboard.service;
 
-import com.example.annonymousboard.entity.Post;
+import com.example.annonymousboard.entity.Article;
 import com.example.annonymousboard.repo.PostRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -12,7 +12,7 @@ import java.util.List;
 public class PostService {
     private final PostRepository postRepository;
 
-    public List<Post> readPostAll() {
+    public List<Article> readPostAll() {
         return postRepository.findAll();
     }
 

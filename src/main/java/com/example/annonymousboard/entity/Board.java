@@ -14,5 +14,5 @@ public class Board {
     private String name;
 
     @OneToMany(mappedBy = "board")
-    private List<Post> posts;
+    private List<Article> articles;
 }

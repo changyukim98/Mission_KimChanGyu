@@ -8,7 +8,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
 @RequiredArgsConstructor
@@ -26,8 +25,8 @@ public class BoardController {
     public String entireView(
             Model model
     ) {
-        model.addAttribute("posts", postService.readPostAll());
-        return "entire-posts";
+        model.addAttribute("articles", postService.readPostAll());
+        return "entire-articles";
     }
 
     @GetMapping("/{boardId}")
@@ -36,6 +35,6 @@ public class BoardController {
             Model model
     ) {
         model.addAttribute("board", boardService.readBoard(boardId));
-        return "board-posts";
+        return "board-articles";
     }
 }

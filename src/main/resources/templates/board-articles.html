@@ -2,12 +2,12 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>[[${board.name}]] 게시글</title>
+    <title>[[${board.name}]]</title>
 </head>
 <body>
 <h1>[[${board.name}]] 게시글</h1>
-<ul th:each="post: ${board.posts}">
-    <li>[[${post.title}]]</li>
+<ul th:each="article: ${board.articles}">
+    <li>[[${article.title}]]</li>
 </ul>
 <a href="/boards/">게시판 목록으로...</a>
 </body>

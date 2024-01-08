@@ -7,7 +7,7 @@ import java.util.List;
 
 @Data
 @Entity
-public class Post {
+public class Article {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private String id;
@@ -18,6 +18,6 @@ public class Post {
     private String writer;
     private String password;
 
-    @OneToMany(mappedBy = "post")
+    @OneToMany(mappedBy = "article")
     private List<Comment> comments;
 }
