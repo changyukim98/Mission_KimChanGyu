@@ -19,14 +19,14 @@ public class BoardController {
     @GetMapping("/")
     public String boardList(Model model) {
         model.addAttribute("boards", boardService.readBoardAll());
-        return "board-list";
+        return "board/board-list";
     }
     @GetMapping("/entire")
     public String entireView(
             Model model
     ) {
         model.addAttribute("articles", articleService.readArticleAll());
-        return "entire-articles";
+        return "board/entire-articles";
     }
 
     @GetMapping("/{boardId}")
@@ -35,6 +35,6 @@ public class BoardController {
             Model model
     ) {
         model.addAttribute("board", boardService.readBoard(boardId));
-        return "board-articles";
+        return "board/board-articles";
     }
 }

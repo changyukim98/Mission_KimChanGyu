@@ -22,7 +22,7 @@ public class ArticleController {
             Model model
     ) {
         model.addAttribute("article", articleService.readArticle(id));
-        return "article-view";
+        return "article/article-view";
     }
 
     @GetMapping("/create")
@@ -30,7 +30,7 @@ public class ArticleController {
             Model model
     ) {
         model.addAttribute("boards", boardService.readBoardAll());
-        return "article-create";
+        return "article/article-create";
     }
 
     @PostMapping("/create")
@@ -52,4 +52,5 @@ public class ArticleController {
         Long articleId = articleService.saveArticle(article);
         return "redirect:/article/" + articleId;
     }
+
 }
