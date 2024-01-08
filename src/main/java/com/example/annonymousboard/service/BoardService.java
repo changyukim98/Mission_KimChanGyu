@@ -1,7 +1,6 @@
 package com.example.annonymousboard.service;
 
 import com.example.annonymousboard.entity.Board;
-import com.example.annonymousboard.entity.Post;
 import com.example.annonymousboard.repo.BoardRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
