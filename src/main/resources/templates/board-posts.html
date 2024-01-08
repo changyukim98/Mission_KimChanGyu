@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>[[${board.name}]] 게시글</title>
+</head>
+<body>
+<h1>[[${board.name}]] 게시글</h1>
+<ul th:each="post: ${board.posts}">
+    <li>[[${post.title}]]</li>
+</ul>
+</body>
+</html>

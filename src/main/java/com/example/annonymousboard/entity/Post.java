@@ -3,6 +3,8 @@ package com.example.annonymousboard.entity;
 import jakarta.persistence.*;
 import lombok.Data;
 
+import java.util.List;
+
 @Data
 @Entity
 public class Post {
@@ -15,4 +17,7 @@ public class Post {
     private String content;
     private String writer;
     private String password;
+
+    @OneToMany(mappedBy = "post")
+    private List<Comment> comments;
 }

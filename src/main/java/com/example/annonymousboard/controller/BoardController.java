@@ -1,6 +1,7 @@
 package com.example.annonymousboard.controller;
 
 import com.example.annonymousboard.service.BoardService;
+import com.example.annonymousboard.service.PostService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -14,24 +15,27 @@ import org.springframework.web.bind.annotation.ResponseBody;
 @RequestMapping("/boards")
 public class BoardController {
     private final BoardService boardService;
+    private final PostService postService;
 
     @GetMapping("/")
     public String boardList(Model model) {
         model.addAttribute("boards", boardService.readBoardAll());
-        System.out.println(boardService.readBoardAll());
         return "board-list";
     }
     @GetMapping("/entire")
-    @ResponseBody
-    public String entireView() {
-        return "전체 게시판입니다.";
+    public String entireView(
+            Model model
+    ) {
+        model.addAttribute("posts", postService.readPostAll());
+        return "entire-posts";
     }
 
     @GetMapping("/{boardId}")
-    @ResponseBody
     public String boardView(
-            @PathVariable("boardId") Long boardId
+            @PathVariable("boardId") Long boardId,
+            Model model
     ) {
-        return "개별 게시판입니다.";
+        model.addAttribute("board", boardService.readBoard(boardId));
+        return "board-posts";
     }
 }
