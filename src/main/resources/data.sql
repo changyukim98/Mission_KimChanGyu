@@ -18,3 +18,4 @@ INSERT INTO article(board_id, content, password, title, writer)
 VALUES (3, '일상 게시판 내용입니다.', '1234', '일상 게시판 제목입니다.', 'ㅇㅇ');
 INSERT INTO article(board_id, content, password, title, writer)
 VALUES (4, '사건사고 게시판 내용입니다.', '1234', '사건사고 게시판 제목입니다.', 'ㅇㅇ');
+

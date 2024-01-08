@@ -10,7 +10,7 @@ import java.util.List;
 public class Article {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private String id;
+    private Long id;
     @ManyToOne
     private Board board;
     private String title;

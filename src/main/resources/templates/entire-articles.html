@@ -9,6 +9,7 @@
 <ul th:each="article: ${articles}">
    <li><a th:href="@{/article/{id}(id=${article.id})}">[[${article.title}]]</a></li>
 </ul>
+<a th:href="@{/article/create}">게시글 작성</a><br>
 <a href="/boards/">게시판 목록으로...</a>
 </body>
 </html>

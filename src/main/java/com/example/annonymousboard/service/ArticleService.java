@@ -22,4 +22,9 @@ public class ArticleService {
         return optionalArticle.orElse(null);
     }
 
+    public Long saveArticle(Article article) {
+        Article saved = articleRepository.save(article);
+        return saved.getId();
+    }
+
 }
