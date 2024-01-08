@@ -40,7 +40,7 @@ public class ArticleController {
             @RequestParam("password") String password,
             @RequestParam("title") String title,
             @RequestParam("content") String content
-     ) {
+    ) {
         Board board = boardService.readBoard(boardId);
 
         Article article = new Article();
@@ -53,4 +53,20 @@ public class ArticleController {
         return "redirect:/article/" + articleId;
     }
 
+    @GetMapping("/{articleId}/delete")
+    public String deleteArticleView(
+            @PathVariable("articleId") Long articleId,
+            Model model
+    ) {
+        model.addAttribute("articleId", articleId);
+        return "/article/article-delete";
+    }
+
+    @PostMapping("/{articleId}/delete")
+    public String deleteArticle(
+            @PathVariable("articleId") Long articleId
+    ) {
+        articleService.deleteArticle(articleId);
+        return "redirect:/boards/";
+    }
 }
