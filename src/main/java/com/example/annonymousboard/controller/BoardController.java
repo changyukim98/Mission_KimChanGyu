@@ -1,7 +1,7 @@
 package com.example.annonymousboard.controller;
 
 import com.example.annonymousboard.service.BoardService;
-import com.example.annonymousboard.service.PostService;
+import com.example.annonymousboard.service.ArticleService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping("/boards")
 public class BoardController {
     private final BoardService boardService;
-    private final PostService postService;
+    private final ArticleService articleService;
 
     @GetMapping("/")
     public String boardList(Model model) {
@@ -25,7 +25,7 @@ public class BoardController {
     public String entireView(
             Model model
     ) {
-        model.addAttribute("articles", postService.readPostAll());
+        model.addAttribute("articles", articleService.readArticleAll());
         return "entire-articles";
     }
 

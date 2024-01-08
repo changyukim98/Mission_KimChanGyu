@@ -7,7 +7,7 @@
 <body>
 <h1>전체 게시글</h1>
 <ul th:each="article: ${articles}">
-   <li>[[${article.title}]]</li>
+   <li><a th:href="@{/article/{id}(id=${article.id})}">[[${article.title}]]</a></li>
 </ul>
 <a href="/boards/">게시판 목록으로...</a>
 </body>
