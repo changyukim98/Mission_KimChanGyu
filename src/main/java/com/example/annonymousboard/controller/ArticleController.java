@@ -2,8 +2,10 @@ package com.example.annonymousboard.controller;
 
 import com.example.annonymousboard.entity.Article;
 import com.example.annonymousboard.entity.Board;
+import com.example.annonymousboard.entity.Comment;
 import com.example.annonymousboard.service.ArticleService;
 import com.example.annonymousboard.service.BoardService;
+import com.example.annonymousboard.service.CommentService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -15,6 +17,7 @@ import org.springframework.web.bind.annotation.*;
 public class ArticleController {
     private final BoardService boardService;
     private final ArticleService articleService;
+    private final CommentService commentService;
 
     @GetMapping("/{articleId}")
     public String articleView(
@@ -102,5 +105,22 @@ public class ArticleController {
             model.addAttribute("articleId", articleId);
             return "article/update-failed";
         }
+    }
+
+    @PostMapping("/{articleId}/comment/")
+    public String createComment(
+            @PathVariable("articleId") Long articleId,
+            @RequestParam("comment_writer") String writer,
+            @RequestParam("comment_password") String password,
+            @RequestParam("comment_content") String content
+    ) {
+        Article article = articleService.readArticle(articleId);
+        Comment comment = new Comment();
+        comment.setArticle(article);
+        comment.setWriter(writer);
+        comment.setPassword(password);
+        comment.setContent(content);
+        commentService.saveComment(comment);
+        return String.format("redirect:/article/%d", articleId);
     }
 }
