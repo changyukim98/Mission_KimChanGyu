@@ -28,9 +28,10 @@ public class BoardController {
     }
 
     @GetMapping("/{boardId}")
+    @ResponseBody
     public String boardView(
             @PathVariable("boardId") Long boardId
     ) {
-        return null;
+        return "개별 게시판입니다.";
     }
 }

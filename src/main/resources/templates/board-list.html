@@ -6,9 +6,11 @@
 </head>
 <body>
 <h1>게시판 목록</h1>
-<p><a href="/boards/entire">전체 게시판</a></p>
-<div th:each="board: ${boards}">
-    <p><a th:href="@{/boards/{id}(id=${board.id})}">[[${board.name}]]</a></p>
-</div>
+<ul>
+    <li><a href="/boards/entire">전체 게시판</a></li>
+    <div th:each="board: ${boards}">
+        <li><a th:href="@{/boards/{id}(id=${board.id})}">[[${board.name}]]</a></li>
+    </div>
+</ul>
 </body>
 </html>
