@@ -2,6 +2,8 @@ package com.example.annonymousboard.entity;
 
 import jakarta.persistence.*;
 import lombok.Data;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 
 import java.util.List;
 
@@ -13,7 +15,7 @@ public class Board {
     private Long id;
     private String name;
 
-    @OneToMany(mappedBy = "board")
+    @OneToMany(mappedBy = "board", cascade = CascadeType.REMOVE)
     @OrderBy("id Desc")
     private List<Article> articles;
 }

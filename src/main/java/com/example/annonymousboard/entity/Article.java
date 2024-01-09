@@ -2,6 +2,8 @@ package com.example.annonymousboard.entity;
 
 import jakarta.persistence.*;
 import lombok.Data;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 
 import java.util.List;
 
@@ -11,13 +13,14 @@ public class Article {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @ManyToOne
-    private Board board;
     private String title;
     private String content;
     private String writer;
     private String password;
 
-    @OneToMany(mappedBy = "article")
+    @ManyToOne
+    private Board board;
+
+    @OneToMany(mappedBy = "article", cascade = CascadeType.REMOVE)
     private List<Comment> comments;
 }
