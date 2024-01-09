@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>[[${hashtag}]] 검색 결과</title>
+</head>
+<body>
+<h1>[[${hashtag}]] 검색 결과</h1>
+<hr>
+<ul>
+    <div th:each="article: ${articles}">
+        <li><a th:href="@{/article/{id}(id=${article.id})}">[[${article.title}]]</a></li>
+    </div>
+</ul>
+<a href="/boards/">게시판 목록으로...</a>
+</body>
+</html>

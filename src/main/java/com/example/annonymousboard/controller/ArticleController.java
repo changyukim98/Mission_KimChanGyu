@@ -151,4 +151,14 @@ public class ArticleController {
             return "comment/delete-failed";
         }
     }
+
+    @GetMapping("/hashtag")
+    public String searchArticleByHashtag(
+            @RequestParam("hashtag")  String hashtag,
+            Model model
+    ) {
+        model.addAttribute("hashtag", hashtag);
+        model.addAttribute("articles", articleService.searchArticleByHashtag(hashtag));
+        return "article/article-search-hashtag";
+    }
 }

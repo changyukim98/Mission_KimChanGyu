@@ -4,7 +4,9 @@ import jakarta.persistence.*;
 import lombok.Data;
 import lombok.ToString;
 
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Data
 @Entity
@@ -22,4 +24,7 @@ public class Article {
 
     @OneToMany(mappedBy = "article", cascade = CascadeType.REMOVE)
     private List<Comment> comments;
+
+    @ElementCollection
+    private Set<String> hashtags = new HashSet<>();
 }

@@ -19,11 +19,13 @@ public interface ArticleRepository extends JpaRepository<Article, Long> {
 
     List<Article> findByContentContainsOrderByIdDesc(String content);
 
-    Optional<Article> findTopByBoardIdAndIdGreaterThanOrderById(Long boardId, Long id);
+    Optional<Article> findTopByBoardIdAndIdGreaterThan(Long boardId, Long id);
 
     Optional<Article> findTopByBoardIdAndIdLessThanOrderByIdDesc(Long boardId, Long id);
 
     Optional<Article> findTopByIdLessThanOrderByIdDesc(Long id);
 
     Optional<Article> findTopByIdGreaterThan(Long id);
+
+    List<Article> findByHashtagsContainsOrderByIdDesc(String hashtag);
 }
