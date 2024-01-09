@@ -123,4 +123,31 @@ public class ArticleController {
         commentService.saveComment(comment);
         return String.format("redirect:/article/%d", articleId);
     }
+
+    @GetMapping("/{articleId}/comment/{commentId}/delete")
+    public String deleteCommentView(
+            @PathVariable("articleId") Long articleId,
+            @PathVariable("commentId") Long commentId,
+            Model model
+    ) {
+        model.addAttribute("articleId", articleId);
+        model.addAttribute("commentId", commentId);
+        return "comment/comment-delete";
+    }
+
+    @PostMapping("/{articleId}/comment/{commentId}/delete")
+    public String deleteComment(
+            @PathVariable("articleId") Long articleId,
+            @PathVariable("commentId") Long commentId,
+            @RequestParam("password") String password,
+            Model model
+    ) {
+        if (commentService.deleteComment(commentId, password)) {
+            return "redirect:/article/" + articleId;
+        } else {
+            model.addAttribute("articleId", articleId);
+            return "comment/delete-failed";
+        }
+
+    }
 }
