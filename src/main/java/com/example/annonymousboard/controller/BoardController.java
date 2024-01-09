@@ -1,5 +1,6 @@
 package com.example.annonymousboard.controller;
 
+import com.example.annonymousboard.entity.Board;
 import com.example.annonymousboard.service.BoardService;
 import com.example.annonymousboard.service.ArticleService;
 import lombok.RequiredArgsConstructor;
@@ -25,7 +26,7 @@ public class BoardController {
     public String entireView(
             Model model
     ) {
-        model.addAttribute("articles", articleService.readArticleAll());
+        model.addAttribute("articles", articleService.readAllArticleDesc());
         return "board/entire-articles";
     }
 
@@ -34,7 +35,8 @@ public class BoardController {
             @PathVariable("boardId") Long boardId,
             Model model
     ) {
-        model.addAttribute("board", boardService.readBoard(boardId));
+        Board board = boardService.readBoard(boardId);
+        model.addAttribute("board", board);
         return "board/board-articles";
     }
 }

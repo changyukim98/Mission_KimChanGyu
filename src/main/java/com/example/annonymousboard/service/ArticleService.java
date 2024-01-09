@@ -1,6 +1,7 @@
 package com.example.annonymousboard.service;
 
 import com.example.annonymousboard.entity.Article;
+import com.example.annonymousboard.entity.Board;
 import com.example.annonymousboard.repo.ArticleRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -13,13 +14,21 @@ import java.util.Optional;
 public class ArticleService {
     private final ArticleRepository articleRepository;
 
-    public List<Article> readArticleAll() {
+    public List<Article> readAllArticle() {
         return articleRepository.findAll();
+    }
+
+    public List<Article> readAllArticleDesc() {
+        return articleRepository.findAllByOrderByIdDesc();
     }
 
     public Article readArticle(Long id) {
         Optional<Article> optionalArticle = articleRepository.findById(id);
         return optionalArticle.orElse(null);
+    }
+
+    public List<Article> readBoardArticle(Long boardId) {
+        return articleRepository.findByBoardIdOrderByIdDesc(boardId);
     }
 
     public Long saveArticle(Article article) {
