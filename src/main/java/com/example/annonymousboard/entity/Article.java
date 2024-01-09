@@ -2,8 +2,7 @@ package com.example.annonymousboard.entity;
 
 import jakarta.persistence.*;
 import lombok.Data;
-import org.hibernate.annotations.OnDelete;
-import org.hibernate.annotations.OnDeleteAction;
+import lombok.ToString;
 
 import java.util.List;
 

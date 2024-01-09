@@ -12,6 +12,12 @@
     <a th:href="@{/article/{id}/update(id=${article.id})}">수정</a>
     <a th:href="@{/article/{id}/delete(id=${article.id})}">삭제</a><br>
     <a th:href="@{/boards/{id}(id=${article.board.id})}">게시판으로 돌아가기...</a><br><br>
+    <div th:if="${prevArticle != null}">
+        <a th:href="@{/article/{id}(id=${prevArticle.id})}">이전글: [[${prevArticle.title}]]</a>
+    </div>
+    <div th:if="${nextArticle != null}">
+        <a th:href="@{/article/{id}(id=${nextArticle.id})}">다음글: [[${nextArticle.title}]]</a>
+    </div>
     <hr>
     <p>댓글</p>
     <div th:each="comment : ${article.comments}">

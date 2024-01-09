@@ -25,6 +25,8 @@ public class ArticleController {
             Model model
     ) {
         model.addAttribute("article", articleService.readArticle(id));
+        model.addAttribute("nextArticle", articleService.getNextArticle(id));
+        model.addAttribute("prevArticle", articleService.getPrevArticle(id));
         return "article/article-view";
     }
 
@@ -148,6 +150,5 @@ public class ArticleController {
             model.addAttribute("articleId", articleId);
             return "comment/delete-failed";
         }
-
     }
 }

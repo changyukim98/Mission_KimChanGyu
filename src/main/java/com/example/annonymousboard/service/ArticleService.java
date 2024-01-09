@@ -77,4 +77,16 @@ public class ArticleService {
     public List<Article> searchBoardArticleByContent(Long boardId, String content) {
         return articleRepository.findByBoardIdAndContentContainsOrderByIdDesc(boardId, content);
     }
+
+    public Article getNextArticle(Long articleId) {
+        Article article = readArticle(articleId);
+        Long boardId = article.getBoard().getId();
+        return articleRepository.findTopByBoardIdAndIdLessThanOrderByIdDesc(boardId, articleId).orElse(null);
+    }
+
+    public Article getPrevArticle(Long articleId) {
+        Article article = readArticle(articleId);
+        Long boardId = article.getBoard().getId();
+        return articleRepository.findTopByBoardIdAndIdGreaterThanOrderById(boardId, articleId).orElse(null);
+    }
 }
