@@ -11,13 +11,13 @@
     <textarea rows="5" cols="40" th:text="${article.content}" readonly></textarea><br>
     <a th:href="@{/article/{id}/update(id=${article.id})}">수정</a>
     <a th:href="@{/article/{id}/delete(id=${article.id})}">삭제</a><br>
-    <a th:href="@{/boards/{id}(id=${article.board.id})}">게시판으로 돌아가기...</a><br><br>
+    <a th:href="@{/boards/entire}">게시판으로 돌아가기...</a><br><br>
     <!-- 이전글, 다음글 -->
     <div th:if="${prevArticle != null}">
-        <a th:href="@{/article/{id}(id=${prevArticle.id})}">이전글: [[${prevArticle.title}]]</a>
+        <a th:href="@{/boards/entire/{id}(id=${prevArticle.id})}">이전글: [[${prevArticle.title}]]</a>
     </div>
     <div th:if="${nextArticle != null}">
-        <a th:href="@{/article/{id}(id=${nextArticle.id})}">다음글: [[${nextArticle.title}]]</a>
+        <a th:href="@{/boards/entire/{id}(id=${nextArticle.id})}">다음글: [[${nextArticle.title}]]</a>
     </div>
     <hr>
     <p>댓글</p>
@@ -44,7 +44,7 @@
 
 <div th:if="${article == null}">
     <p>잘못된 게시글 번호입니다.</p>
-    <a href="/boards/">메인으로 돌아가기...</a>
+    <a href="/boards/entire">게시판으로 돌아가기...</a>
 </div>
 </body>
 </html>

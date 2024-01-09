@@ -1,5 +1,6 @@
 package com.example.annonymousboard.controller;
 
+import com.example.annonymousboard.entity.Article;
 import com.example.annonymousboard.entity.Board;
 import com.example.annonymousboard.service.BoardService;
 import com.example.annonymousboard.service.ArticleService;
@@ -32,6 +33,17 @@ public class BoardController {
     ) {
         model.addAttribute("articles", articleService.readAllArticleDesc());
         return "board/entire-articles";
+    }
+
+    @GetMapping("/entire/{articleId}")
+    public String readArticleInEntire(
+            @PathVariable("articleId") Long articleId,
+            Model model
+    ) {
+        model.addAttribute("article", articleService.readArticle(articleId));
+        model.addAttribute("nextArticle", articleService.getNextArticleInEntire(articleId));
+        model.addAttribute("prevArticle", articleService.getPrevArticleInEntire(articleId));
+        return "board/entire-article-view";
     }
 
     // 전체 게시판 검색 결과

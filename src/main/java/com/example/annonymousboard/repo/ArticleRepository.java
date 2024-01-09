@@ -22,4 +22,8 @@ public interface ArticleRepository extends JpaRepository<Article, Long> {
     Optional<Article> findTopByBoardIdAndIdGreaterThanOrderById(Long boardId, Long id);
 
     Optional<Article> findTopByBoardIdAndIdLessThanOrderByIdDesc(Long boardId, Long id);
+
+    Optional<Article> findTopByIdLessThanOrderByIdDesc(Long id);
+
+    Optional<Article> findTopByIdGreaterThan(Long id);
 }

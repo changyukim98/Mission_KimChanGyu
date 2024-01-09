@@ -89,4 +89,15 @@ public class ArticleService {
         Long boardId = article.getBoard().getId();
         return articleRepository.findTopByBoardIdAndIdGreaterThanOrderById(boardId, articleId).orElse(null);
     }
+
+    public Article getNextArticleInEntire(Long articleId) {
+        Article article = readArticle(articleId);
+        Long boardId = article.getBoard().getId();
+        return articleRepository.findTopByIdLessThanOrderByIdDesc(articleId).orElse(null);
+    }
+
+    public Article getPrevArticleInEntire(Long articleId) {
+        Article article = readArticle(articleId);
+        return articleRepository.findTopByIdGreaterThan(articleId).orElse(null);
+    }
 }

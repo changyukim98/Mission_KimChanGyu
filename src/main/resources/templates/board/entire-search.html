@@ -17,7 +17,7 @@
 </form>
 <ul>
     <div th:each="article: ${articles}">
-        <li><a th:href="@{/article/{id}(id=${article.id})}">[[${article.title}]]</a></li>
+        <li><a th:href="@{/boards/entire/{id}(id=${article.id})}">[[${article.title}]]</a></li>
     </div>
 </ul>
 <a th:href="@{/article/create}">게시글 작성</a><br>
