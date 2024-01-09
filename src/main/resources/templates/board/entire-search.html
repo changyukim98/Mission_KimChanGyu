@@ -2,11 +2,12 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>[[${board.name}]]</title>
+    <title>전체 게시글 검색결과</title>
 </head>
 <body>
-<h1>[[${board.name}]]</h1>
-<form th:action="@{/boards/{boardId}/search(boardId=${board.id})}" method="get">
+<h1>전체 게시글 검색 결과</h1>
+<hr>
+<form action="/boards/entire/search" method="get">
     <input type="text" name="search_text" th:value="${search_text}">
     <select name="search_opt">
         <option value="제목">제목</option>
@@ -14,9 +15,8 @@
     </select>
     <button type="submit">검색</button>
 </form>
-<hr>
 <ul>
-    <div th:each="article: ${board.articles}">
+    <div th:each="article: ${articles}">
         <li><a th:href="@{/article/{id}(id=${article.id})}">[[${article.title}]]</a></li>
     </div>
 </ul>

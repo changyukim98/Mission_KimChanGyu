@@ -1,7 +1,6 @@
 package com.example.annonymousboard.service;
 
 import com.example.annonymousboard.entity.Article;
-import com.example.annonymousboard.entity.Board;
 import com.example.annonymousboard.repo.ArticleRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -61,5 +60,21 @@ public class ArticleService {
             return true;
         }
         return false;
+    }
+
+    public List<Article> searchAllArticleByTitle(String title) {
+        return articleRepository.findByTitleContainsOrderByIdDesc(title);
+    }
+
+    public List<Article> searchAllArticleByContent(String content) {
+        return articleRepository.findByContentContainsOrderByIdDesc(content);
+    }
+
+    public List<Article> searchBoardArticleByTitle(Long boardId, String title) {
+        return articleRepository.findByBoardIdAndTitleContainsOrderByIdDesc(boardId, title);
+    }
+
+    public List<Article> searchBoardArticleByContent(Long boardId, String content) {
+        return articleRepository.findByBoardIdAndContentContainsOrderByIdDesc(boardId, content);
     }
 }

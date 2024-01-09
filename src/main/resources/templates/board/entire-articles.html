@@ -6,8 +6,23 @@
 </head>
 <body>
 <h1>전체 게시글</h1>
-<ul th:each="article: ${articles}">
-   <li><a th:href="@{/article/{id}(id=${article.id})}">[[${article.title}]]</a></li>
+<form action="/boards/entire/search" method="get">
+    <label>
+        <input type="text" name="search_text">
+    </label>
+    <label>
+        <select name="search_opt">
+            <option value="제목">제목</option>
+            <option value="내용">내용</option>
+        </select>
+    </label>
+    <button type="submit">검색</button>
+</form>
+<hr>
+<ul>
+    <div th:each="article: ${articles}">
+        <li><a th:href="@{/article/{id}(id=${article.id})}">[[${article.title}]]</a></li>
+    </div>
 </ul>
 <a th:href="@{/article/create}">게시글 작성</a><br>
 <a href="/boards/">게시판 목록으로...</a>
