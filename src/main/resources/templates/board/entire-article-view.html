@@ -8,6 +8,20 @@
 <div th:if="${article != null}">
     <h2 th:text="${article.title}"></h2>
     <p>작성자: [[${article.writer}]]</p>
+    <!-- 이미지 업로드 폼 -->
+    <form th:action="@{/article/{id}/image/add(id=${article.id})}" method="post" enctype="multipart/form-data">
+        이미지 추가: <input type="file" name="upload_image" accept="image/*"><br>
+        비밀번호: <input type="password" name="password">
+        <input type="submit" value="업로드">
+    </form>
+    <br>
+    <!-- 이미지 출력-->
+    <div th:if="${!article.images.isEmpty()}" th:each="image: ${article.images}">
+        <img th:src="@{/files/{image}(image=${image})}" alt="image"
+             width="500px" height="auto">
+        <a th:href="@{/article/{id}/image/delete(id=${article.id}, image=${image})}">삭제</a>
+        <br>
+    </div>
     <textarea rows="5" cols="40" th:text="${article.content}" readonly></textarea><br>
     <!-- 해시 태그 -->
     <div th:if="${!article.hashtags.isEmpty()}">
@@ -29,8 +43,8 @@
     <hr>
     <p>댓글([[${article.comments.size()}]])</p>
     <div th:each="comment : ${article.comments}">
-        작성자: [[${comment.writer}]]
-        <textarea rows="5" cols="40" th:text="${comment.content}" readonly></textarea>
+        작성자: [[${comment.writer}]]<br>
+        <textarea rows="5" cols="40" th:text="${comment.content}" readonly></textarea><br>
         <a th:href="@{/article/{articleId}/comment/{commentId}/delete(articleId=${article.id}, commentId=${comment.id})}">삭제</a>
         <hr>
     </div>
@@ -41,7 +55,7 @@
         </label><br>
         <label>
             비밀번호: <input type="password" name="comment_password">
-        </label>
+        </label><br>
         <label>
             <textarea name="comment_content" rows="5" cols="40"></textarea>
         </label>

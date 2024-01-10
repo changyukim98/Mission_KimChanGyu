@@ -10,6 +10,9 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
+
+import java.io.IOException;
 
 @Controller
 @RequiredArgsConstructor
@@ -72,7 +75,7 @@ public class ArticleController {
             @PathVariable("articleId") Long articleId,
             @RequestParam("password") String password,
             Model model
-    ) {
+    ) throws IOException {
         if (articleService.deleteArticle(articleId, password)) {
             return "redirect:/boards/";
         } else {
@@ -154,11 +157,52 @@ public class ArticleController {
 
     @GetMapping("/hashtag")
     public String searchArticleByHashtag(
-            @RequestParam("hashtag")  String hashtag,
+            @RequestParam("hashtag") String hashtag,
             Model model
     ) {
         model.addAttribute("hashtag", hashtag);
         model.addAttribute("articles", articleService.searchArticleByHashtag(hashtag));
         return "article/article-search-hashtag";
+    }
+
+    @PostMapping("/{articleId}/image/add")
+    public String addImageToPost(
+            @PathVariable("articleId") Long articleId,
+            @RequestParam("upload_image") MultipartFile image,
+            @RequestParam("password") String password,
+            Model model
+    ) throws IOException {
+        if (articleService.saveArticleWithImage(articleId, image, password)) {
+            return "redirect:/article/" + articleId;
+        } else {
+            model.addAttribute("articleId", articleId);
+            return "article/image-add-failed";
+        }
+    }
+
+    @GetMapping("/{articleId}/image/delete")
+    public String deleteImageView(
+            @PathVariable("articleId") Long articleId,
+            @RequestParam("image") String image,
+            Model model
+    ) {
+        model.addAttribute("articleId", articleId);
+        model.addAttribute("image", image);
+        return "article/image-delete";
+    }
+
+    @PostMapping("/{articleId}/image/delete")
+    public String deleteImage(
+            @PathVariable("articleId") Long articleId,
+            @RequestParam("password") String password,
+            @RequestParam("image") String image,
+            Model model
+    ) throws IOException {
+        if (articleService.deleteImageFromArticle(articleId, password, image)) {
+            return "redirect:/article/" + articleId;
+        } else {
+            model.addAttribute("articleId", articleId);
+            return "article/image-delete-failed";
+        }
     }
 }

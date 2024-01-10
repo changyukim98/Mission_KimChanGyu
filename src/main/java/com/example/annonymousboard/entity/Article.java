@@ -2,8 +2,7 @@ package com.example.annonymousboard.entity;
 
 import jakarta.persistence.*;
 import lombok.Data;
-import lombok.ToString;
-
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -27,4 +26,7 @@ public class Article {
 
     @ElementCollection
     private Set<String> hashtags = new HashSet<>();
+
+    @ElementCollection
+    private List<String> images = new ArrayList<>();
 }
