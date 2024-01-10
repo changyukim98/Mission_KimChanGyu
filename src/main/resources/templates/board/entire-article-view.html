@@ -27,7 +27,7 @@
         <a th:href="@{/boards/entire/{id}(id=${nextArticle.id})}">다음글: [[${nextArticle.title}]]</a>
     </div>
     <hr>
-    <p>댓글</p>
+    <p>댓글([[${article.comments.size()}]])</p>
     <div th:each="comment : ${article.comments}">
         작성자: [[${comment.writer}]]
         <textarea rows="5" cols="40" th:text="${comment.content}" readonly></textarea>

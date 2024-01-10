@@ -9,7 +9,7 @@
 <hr>
 <ul>
     <div th:each="article: ${articles}">
-        <li><a th:href="@{/article/{id}(id=${article.id})}">[[${article.title}]]</a></li>
+        <li><a th:href="@{/article/{id}(id=${article.id})}">[[${article.title}]]([[${article.comments.size()}]])</a></li>
     </div>
 </ul>
 <a href="/boards/">게시판 목록으로...</a>

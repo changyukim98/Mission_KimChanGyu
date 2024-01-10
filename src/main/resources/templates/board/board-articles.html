@@ -7,7 +7,7 @@
 <body>
 <h1>[[${board.name}]]</h1>
 <form th:action="@{/boards/{boardId}/search(boardId=${board.id})}" method="get">
-    <input type="text" name="search_text" th:value="${search_text}">
+    <input type="text" name="search_text">
     <select name="search_opt">
         <option value="제목">제목</option>
         <option value="내용">내용</option>
@@ -17,7 +17,7 @@
 <hr>
 <ul>
     <div th:each="article: ${board.articles}">
-        <li><a th:href="@{/article/{id}(id=${article.id})}">[[${article.title}]]</a></li>
+        <li><a th:href="@{/article/{id}(id=${article.id})}">[[${article.title}]]([[${article.comments.size()}]])</a></li>
     </div>
 </ul>
 <a th:href="@{/article/create(board=${board.id})}">게시글 작성</a><br>
