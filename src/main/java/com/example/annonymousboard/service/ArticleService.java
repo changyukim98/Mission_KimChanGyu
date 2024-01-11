@@ -131,9 +131,6 @@ public class ArticleService {
 
             // 이미지 경로를 Entity에 추가
             article.getImages().add(fileName);
-
-            // Entity를 저장
-            articleRepository.save(article);
             return true;
         }
         return false;
@@ -147,8 +144,8 @@ public class ArticleService {
             deleteFile(image);
         }
         images.clear();
-        articleRepository.save(article);
     }
+
     public boolean deleteImageFromArticle(Long articleId, String password, String image) throws IOException {
         Article article = readArticle(articleId);
         if (article == null || !article.getPassword().equals(password)) return false;
