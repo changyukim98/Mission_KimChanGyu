@@ -116,14 +116,11 @@ public class ArticleService {
 
     // 전체 게시글에서 다음글 가져오기
     public Article getNextArticleInEntire(Long articleId) {
-        Article article = readArticle(articleId);
-        Long boardId = article.getBoard().getId();
         return articleRepository.findTopByIdLessThanOrderByIdDesc(articleId).orElse(null);
     }
 
     // 전체 게시글에서 이전글 가져오기
     public Article getPrevArticleInEntire(Long articleId) {
-        Article article = readArticle(articleId);
         return articleRepository.findTopByIdGreaterThan(articleId).orElse(null);
     }
 
@@ -149,6 +146,8 @@ public class ArticleService {
 
             // 이미지 경로를 Entity에 추가
             article.getImages().add(fileName);
+
+            articleRepository.save(article);
             return true;
         }
         return false;

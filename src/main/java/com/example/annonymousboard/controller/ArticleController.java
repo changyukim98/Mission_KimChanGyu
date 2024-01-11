@@ -36,7 +36,7 @@ public class ArticleController {
 
     // article 작성 폼
     @GetMapping("/create")
-    public String createArticleView(
+    public String createArticleForm(
             Model model
     ) {
         model.addAttribute("boards", boardService.readBoardAll());
@@ -66,7 +66,7 @@ public class ArticleController {
 
     // article 삭제 폼
     @GetMapping("/{articleId}/delete")
-    public String deleteArticleView(
+    public String deleteArticleForm(
             @PathVariable("articleId") Long articleId,
             Model model
     ) {

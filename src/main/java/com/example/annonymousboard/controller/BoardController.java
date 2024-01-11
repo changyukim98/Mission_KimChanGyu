@@ -74,7 +74,7 @@ public class BoardController {
         return "board/board-articles";
     }
 
-    // 전체 게시판 검색 결과
+    // 특정 게시판 검색 결과
     @GetMapping("/{boardId}/search")
     public String boardSearch(
             @PathVariable("boardId") Long boardId,
