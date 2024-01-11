@@ -4,13 +4,13 @@ spring:
         driver-class-name: org.sqlite.JDBC
     jpa:
         hibernate:
-            ddl-auto: create
+            ddl-auto: none
         show-sql: false
         database-platform: org.hibernate.community.dialect.SQLiteDialect
         defer-datasource-initialization: true
     sql:
         init:
-          mode: always
+          mode: never
   # 파일 얿로드 크기 제한
     servlet:
         multipart:
