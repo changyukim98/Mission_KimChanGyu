@@ -1,6 +1,5 @@
 package com.example.annonymousboard.controller;
 
-import com.example.annonymousboard.entity.Article;
 import com.example.annonymousboard.entity.Board;
 import com.example.annonymousboard.service.BoardService;
 import com.example.annonymousboard.service.ArticleService;
@@ -35,6 +34,7 @@ public class BoardController {
         return "board/entire-articles";
     }
 
+    // 전체 게시판에서 article 읽기
     @GetMapping("/entire/{articleId}")
     public String readArticleInEntire(
             @PathVariable("articleId") Long articleId,
@@ -74,6 +74,7 @@ public class BoardController {
         return "board/board-articles";
     }
 
+    // 전체 게시판 검색 결과
     @GetMapping("/{boardId}/search")
     public String boardSearch(
             @PathVariable("boardId") Long boardId,

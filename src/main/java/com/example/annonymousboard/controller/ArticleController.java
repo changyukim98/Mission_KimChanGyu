@@ -22,6 +22,7 @@ public class ArticleController {
     private final ArticleService articleService;
     private final CommentService commentService;
 
+    // article 읽기 화면
     @GetMapping("/{articleId}")
     public String articleView(
             @PathVariable("articleId") Long id,
@@ -33,6 +34,7 @@ public class ArticleController {
         return "article/article-view";
     }
 
+    // article 작성 폼
     @GetMapping("/create")
     public String createArticleView(
             Model model
@@ -41,6 +43,7 @@ public class ArticleController {
         return "article/article-create";
     }
 
+    // article 생성 처리
     @PostMapping("/create")
     public String createArticle(
             @RequestParam("boardId") Long boardId,
@@ -61,6 +64,7 @@ public class ArticleController {
         return "redirect:/article/" + articleId;
     }
 
+    // article 삭제 폼
     @GetMapping("/{articleId}/delete")
     public String deleteArticleView(
             @PathVariable("articleId") Long articleId,
@@ -70,20 +74,24 @@ public class ArticleController {
         return "/article/article-delete";
     }
 
+    // article 삭제 처리
     @PostMapping("/{articleId}/delete")
     public String deleteArticle(
             @PathVariable("articleId") Long articleId,
             @RequestParam("password") String password,
             Model model
     ) throws IOException {
+        // 삭제 성공시
         if (articleService.deleteArticle(articleId, password)) {
             return "redirect:/boards/";
+        // 실패시
         } else {
             model.addAttribute("articleId", articleId);
             return "article/delete-failed";
         }
     }
 
+    // article 수정 폼
     @GetMapping("/{articleId}/update")
     public String updateArticleForm(
             @PathVariable("articleId") Long articleId,
@@ -94,6 +102,7 @@ public class ArticleController {
         return "article/article-update";
     }
 
+    // article 수정
     @PostMapping("/{articleId}/update")
     public String updateArticle(
             @PathVariable("articleId") Long articleId,
@@ -103,15 +112,17 @@ public class ArticleController {
             @RequestParam("content") String content,
             Model model
     ) {
-        // 성공시
+        // 수정 성공 시
         if (articleService.updateArticle(articleId, password, writer, title, content)) {
             return String.format("redirect:/article/%d", articleId);
+        // 수정 실패 시
         } else {
             model.addAttribute("articleId", articleId);
             return "article/update-failed";
         }
     }
 
+    // 댓글 추가 요청 처리
     @PostMapping("/{articleId}/comment/")
     public String createComment(
             @PathVariable("articleId") Long articleId,
@@ -129,6 +140,7 @@ public class ArticleController {
         return String.format("redirect:/article/%d", articleId);
     }
 
+    // 댓글 삭제 요청 폼
     @GetMapping("/{articleId}/comment/{commentId}/delete")
     public String deleteCommentView(
             @PathVariable("articleId") Long articleId,
@@ -140,6 +152,7 @@ public class ArticleController {
         return "comment/comment-delete";
     }
 
+    // 댓글 삭제 요청 처리
     @PostMapping("/{articleId}/comment/{commentId}/delete")
     public String deleteComment(
             @PathVariable("articleId") Long articleId,
@@ -147,14 +160,17 @@ public class ArticleController {
             @RequestParam("password") String password,
             Model model
     ) {
+        // 삭제 성공 시
         if (commentService.deleteComment(commentId, password)) {
             return "redirect:/article/" + articleId;
+        // 삭제 실패 시
         } else {
             model.addAttribute("articleId", articleId);
             return "comment/delete-failed";
         }
     }
 
+    // 해시태그를 이용한 검색
     @GetMapping("/hashtag")
     public String searchArticleByHashtag(
             @RequestParam("hashtag") String hashtag,
@@ -165,6 +181,7 @@ public class ArticleController {
         return "article/article-search-hashtag";
     }
 
+    // 게시글에 이미지 추가 처리
     @PostMapping("/{articleId}/image/add")
     public String addImageToPost(
             @PathVariable("articleId") Long articleId,
@@ -172,14 +189,17 @@ public class ArticleController {
             @RequestParam("password") String password,
             Model model
     ) throws IOException {
+        // 이미지 추가 성공 시
         if (articleService.saveArticleWithImage(articleId, image, password)) {
             return "redirect:/article/" + articleId;
+        // 실패 시
         } else {
             model.addAttribute("articleId", articleId);
             return "article/image-add-failed";
         }
     }
 
+    // 게시글에 이미지 삭제 폼
     @GetMapping("/{articleId}/image/delete")
     public String deleteImageView(
             @PathVariable("articleId") Long articleId,
@@ -191,6 +211,7 @@ public class ArticleController {
         return "article/image-delete";
     }
 
+    // 이미지 삭제 처리
     @PostMapping("/{articleId}/image/delete")
     public String deleteImage(
             @PathVariable("articleId") Long articleId,
@@ -198,8 +219,10 @@ public class ArticleController {
             @RequestParam("image") String image,
             Model model
     ) throws IOException {
+        // 이미지 삭제 성공 시
         if (articleService.deleteImageFromArticle(articleId, password, image)) {
             return "redirect:/article/" + articleId;
+        // 이미지 삭제 실패 시
         } else {
             model.addAttribute("articleId", articleId);
             return "article/image-delete-failed";
